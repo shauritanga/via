@@ -1,0 +1,259 @@
+{
+  "@@locale": "en",
+  "appTitle": "VIA - Voice Interactive Assistant",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  
+  "welcome": "Welcome to VIA",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  
+  "documents": "Documents",
+  "@documents": {
+    "description": "Documents section title"
+  },
+  
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings section title"
+  },
+  
+  "uploadDocument": "Upload Document",
+  "@uploadDocument": {
+    "description": "Upload document button text"
+  },
+  
+  "deleteDocument": "Delete Document",
+  "@deleteDocument": {
+    "description": "Delete document button text"
+  },
+  
+  "openDocument": "Open Document",
+  "@openDocument": {
+    "description": "Open document button text"
+  },
+  
+  "readDocument": "Read Document",
+  "@readDocument": {
+    "description": "Read document button text"
+  },
+  
+  "stopReading": "Stop Reading",
+  "@stopReading": {
+    "description": "Stop reading button text"
+  },
+  
+  "pauseReading": "Pause Reading",
+  "@pauseReading": {
+    "description": "Pause reading button text"
+  },
+  
+  "resumeReading": "Resume Reading",
+  "@resumeReading": {
+    "description": "Resume reading button text"
+  },
+  
+  "nextPage": "Next Page",
+  "@nextPage": {
+    "description": "Next page button text"
+  },
+  
+  "previousPage": "Previous Page",
+  "@previousPage": {
+    "description": "Previous page button text"
+  },
+  
+  "goToPage": "Go to Page",
+  "@goToPage": {
+    "description": "Go to page button text"
+  },
+  
+  "pageNumber": "Page {number}",
+  "@pageNumber": {
+    "description": "Page number display",
+    "placeholders": {
+      "number": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  
+  "totalPages": "{total} pages",
+  "@totalPages": {
+    "description": "Total pages display",
+    "placeholders": {
+      "total": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  
+  "language": "Language",
+  "@language": {
+    "description": "Language setting label"
+  },
+  
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  
+  "swahili": "Swahili",
+  "@swahili": {
+    "description": "Swahili language option"
+  },
+  
+  "speechSettings": "Speech Settings",
+  "@speechSettings": {
+    "description": "Speech settings section title"
+  },
+  
+  "speechRate": "Speech Rate",
+  "@speechRate": {
+    "description": "Speech rate setting label"
+  },
+  
+  "pitch": "Pitch",
+  "@pitch": {
+    "description": "Pitch setting label"
+  },
+  
+  "volume": "Volume",
+  "@volume": {
+    "description": "Volume setting label"
+  },
+  
+  "accessibilitySettings": "Accessibility Settings",
+  "@accessibilitySettings": {
+    "description": "Accessibility settings section title"
+  },
+  
+  "highContrastMode": "High Contrast Mode",
+  "@highContrastMode": {
+    "description": "High contrast mode setting"
+  },
+  
+  "textSize": "Text Size",
+  "@textSize": {
+    "description": "Text size setting"
+  },
+  
+  "voiceFeedback": "Voice Feedback",
+  "@voiceFeedback": {
+    "description": "Voice feedback setting"
+  },
+  
+  "hapticFeedback": "Haptic Feedback",
+  "@hapticFeedback": {
+    "description": "Haptic feedback setting"
+  },
+  
+  "voiceCommands": "Voice Commands",
+  "@voiceCommands": {
+    "description": "Voice commands section title"
+  },
+  
+  "startListening": "Start Listening",
+  "@startListening": {
+    "description": "Start listening button text"
+  },
+  
+  "stopListening": "Stop Listening",
+  "@stopListening": {
+    "description": "Stop listening button text"
+  },
+  
+  "listening": "Listening...",
+  "@listening": {
+    "description": "Listening status text"
+  },
+  
+  "speakCommand": "Speak a command",
+  "@speakCommand": {
+    "description": "Instruction to speak a command"
+  },
+  
+  "commandNotRecognized": "Command not recognized",
+  "@commandNotRecognized": {
+    "description": "Error message for unrecognized command"
+  },
+  
+  "noDocuments": "No documents found",
+  "@noDocuments": {
+    "description": "Message when no documents are available"
+  },
+  
+  "uploadingDocument": "Uploading document...",
+  "@uploadingDocument": {
+    "description": "Status message during document upload"
+  },
+  
+  "documentUploaded": "Document uploaded successfully",
+  "@documentUploaded": {
+    "description": "Success message after document upload"
+  },
+  
+  "documentDeleted": "Document deleted successfully",
+  "@documentDeleted": {
+    "description": "Success message after document deletion"
+  },
+  
+  "error": "Error",
+  "@error": {
+    "description": "Generic error label"
+  },
+  
+  "networkError": "Please check your internet connection",
+  "@networkError": {
+    "description": "Network error message"
+  },
+  
+  "permissionDenied": "Permission denied. Please grant required permissions",
+  "@permissionDenied": {
+    "description": "Permission denied error message"
+  },
+  
+  "fileNotFound": "File not found",
+  "@fileNotFound": {
+    "description": "File not found error message"
+  },
+  
+  "unsupportedFileType": "Unsupported file type",
+  "@unsupportedFileType": {
+    "description": "Unsupported file type error message"
+  },
+  
+  "fileTooLarge": "File size exceeds maximum limit",
+  "@fileTooLarge": {
+    "description": "File too large error message"
+  },
+  
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  },
+  
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  
+  "help": "Help",
+  "@help": {
+    "description": "Help button text"
+  },
+  
+  "about": "About",
+  "@about": {
+    "description": "About button text"
+  }
+}

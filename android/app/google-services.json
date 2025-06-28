@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "37505171781",
+    "project_id": "via-dit",
+    "storage_bucket": "via-dit.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37505171781:android:3e219afbc0afe2a1c9fe2c",
+        "android_client_info": {
+          "package_name": "com.example.via"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP72eTrkkBWqzCbws7POP56b2gqPVXvtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

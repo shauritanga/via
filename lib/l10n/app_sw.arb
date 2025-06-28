@@ -1,0 +1,100 @@
+{
+  "@@locale": "sw",
+  "appTitle": "VIA - Msaidizi wa Sauti",
+  
+  "welcome": "Karibu VIA",
+  
+  "documents": "Hati",
+  
+  "settings": "Mipangilio",
+  
+  "uploadDocument": "Pakia Hati",
+  
+  "deleteDocument": "Futa Hati",
+  
+  "openDocument": "Fungua Hati",
+  
+  "readDocument": "Soma Hati",
+  
+  "stopReading": "Acha Kusoma",
+  
+  "pauseReading": "Simamisha Kusoma",
+  
+  "resumeReading": "Endelea Kusoma",
+  
+  "nextPage": "Ukurasa Unaofuata",
+  
+  "previousPage": "Ukurasa Uliotangulia",
+  
+  "goToPage": "Nenda Ukurasa",
+  
+  "pageNumber": "Ukurasa {number}",
+  
+  "totalPages": "Kurasa {total}",
+  
+  "language": "Lugha",
+  
+  "english": "Kiingereza",
+  
+  "swahili": "Kiswahili",
+  
+  "speechSettings": "Mipangilio ya Sauti",
+  
+  "speechRate": "Kasi ya Kusema",
+  
+  "pitch": "Mlolongo wa Sauti",
+  
+  "volume": "Kiwango cha Sauti",
+  
+  "accessibilitySettings": "Mipangilio ya Ufikaji",
+  
+  "highContrastMode": "Hali ya Utofauti Mkubwa",
+  
+  "textSize": "Ukubwa wa Maandishi",
+  
+  "voiceFeedback": "Majibu ya Sauti",
+  
+  "hapticFeedback": "Majibu ya Kugusa",
+  
+  "voiceCommands": "Amri za Sauti",
+  
+  "startListening": "Anza Kusikiliza",
+  
+  "stopListening": "Acha Kusikiliza",
+  
+  "listening": "Ninasikiliza...",
+  
+  "speakCommand": "Sema amri",
+  
+  "commandNotRecognized": "Amri haijatambuliwa",
+  
+  "noDocuments": "Hakuna hati zilizopatikana",
+  
+  "uploadingDocument": "Ninapakia hati...",
+  
+  "documentUploaded": "Hati imepakiwa kwa mafanikio",
+  
+  "documentDeleted": "Hati imefutwa kwa mafanikio",
+  
+  "error": "Hitilafu",
+  
+  "networkError": "Tafadhali angalia muunganisho wako wa mtandao",
+  
+  "permissionDenied": "Ruhusa imekataliwa. Tafadhali toa ruhusa zinazohitajika",
+  
+  "fileNotFound": "Faili halijapatikana",
+  
+  "unsupportedFileType": "Aina ya faili haihamiliwi",
+  
+  "fileTooLarge": "Ukubwa wa faili umezidi kikomo cha juu",
+  
+  "cancel": "Ghairi",
+  
+  "ok": "Sawa",
+  
+  "save": "Hifadhi",
+  
+  "help": "Msaada",
+  
+  "about": "Kuhusu"
+}
