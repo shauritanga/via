@@ -7,24 +7,94 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:via/main.dart';
+import 'package:via/core/config/api_config.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('VIA App Tests', () {
+    setUpAll(() async {
+      // Initialize API configuration for tests
+      await ApiConfig.initialize();
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    testWidgets('App should start without crashing', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: MyApp(),
+        ),
+      );
+      
+      // Wait for initial build
+      await tester.pump();
+      
+      // Verify that the app renders without crashing
+      expect(find.byType(MaterialApp), findsOneWidget);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    testWidgets('App should have proper title', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: MyApp(),
+        ),
+      );
+      
+      await tester.pump();
+      
+      // Check for the app title in the MaterialApp
+      final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
+      expect(materialApp.title, equals('VIA - Voice Interactive Assistant'));
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    testWidgets('App should support multiple languages', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: MyApp(),
+        ),
+      );
+      
+      await tester.pump();
+      
+      // Verify that the app supports localization
+      final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
+      expect(materialApp.localizationsDelegates, isNotEmpty);
+      expect(materialApp.supportedLocales, isNotEmpty);
+    });
+
+    test('API Configuration should work correctly', () {
+      // Test configuration status
+      final status = ApiConfig.getConfigStatus();
+      expect(status, isA<Map<String, dynamic>>());
+      expect(status['openAiConfigured'], isA<bool>());
+      expect(status['googleTranslateConfigured'], isA<bool>());
+    });
+
+    test('API Key validation should work', () {
+      // Test OpenAI key validation
+      expect(ApiConfig.isValidOpenAiKey('sk-test123456789012345678901234567890'), isTrue);
+      expect(ApiConfig.isValidOpenAiKey('invalid-key'), isFalse);
+      
+      // Test Google key validation
+      expect(ApiConfig.isValidGoogleKey('AIzaSyC12345678901234567890123456789012345'), isTrue);
+      expect(ApiConfig.isValidGoogleKey('invalid'), isFalse);
+    });
+
+    test('API Key management should work', () async {
+      // Test setting and getting API keys
+      await ApiConfig.setOpenAiApiKey('sk-test123456789012345678901234567890');
+      
+      // Clear keys after test
+      await ApiConfig.clearAllApiKeys();
+    });
+
+    test('Headers generation should work', () {
+      // Test OpenAI headers
+      final openAiHeaders = ApiConfig.openAiHeaders;
+      expect(openAiHeaders['Content-Type'], equals('application/json'));
+      
+      // Test Google Translate headers
+      final googleHeaders = ApiConfig.googleTranslateHeaders;
+      expect(googleHeaders['Content-Type'], equals('application/json'));
+    });
   });
 }

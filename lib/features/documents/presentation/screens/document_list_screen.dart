@@ -6,6 +6,7 @@ import '../../../../core/navigation/app_router.dart';
 import '../providers/document_providers.dart';
 import '../widgets/document_list_widget.dart';
 import '../widgets/document_upload_widget.dart';
+import '../../../voice_commands/presentation/widgets/voice_status_indicator.dart';
 
 class DocumentListScreen extends ConsumerWidget {
   const DocumentListScreen({super.key});
@@ -35,26 +36,33 @@ class DocumentListScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          // Statistics card
-          if (documentStats['totalDocuments'] > 0) ...[
-            _buildStatsCard(context, documentStats, localizations),
-            const SizedBox(height: 8),
-          ],
+          Column(
+            children: [
+              // Statistics card
+              if (documentStats['totalDocuments'] > 0) ...[
+                _buildStatsCard(context, documentStats, localizations),
+                const SizedBox(height: 8),
+              ],
 
-          // Document list
-          Expanded(
-            child: DocumentListWidget(
-              onDocumentSelected: (document) {
-                // Set the selected document and navigate to reader
-                ref.read(selectedDocumentProvider.notifier).state = document;
-                context.go('${AppRoutes.documents}/reader/${document.id}');
-              },
-              showUploadButton: documentStats['totalDocuments'] == 0,
-              showSearchBar: documentStats['totalDocuments'] > 0,
-            ),
+              // Document list
+              Expanded(
+                child: DocumentListWidget(
+                  onDocumentSelected: (document) {
+                    // Set the selected document and navigate to reader
+                    ref.read(selectedDocumentProvider.notifier).state =
+                        document;
+                    context.go('${AppRoutes.documents}/reader/${document.id}');
+                  },
+                  showUploadButton: documentStats['totalDocuments'] == 0,
+                  showSearchBar: documentStats['totalDocuments'] > 0,
+                ),
+              ),
+            ],
           ),
+          // Voice status indicator overlay
+          const VoiceStatusIndicator(showAsOverlay: true),
         ],
       ),
     );

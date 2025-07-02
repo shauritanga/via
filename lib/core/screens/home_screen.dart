@@ -19,7 +19,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
+    final localizations = AppLocalizations.of(context);
 
     return VoiceCommandIntegration(
       child: Scaffold(
@@ -42,7 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         NavigationDestination(
           icon: const Icon(Icons.mic_outlined),
           selectedIcon: const Icon(Icons.mic),
-          label: localizations.voiceCommands,
+          label: '',
         ),
         NavigationDestination(
           icon: const Icon(Icons.settings_outlined),

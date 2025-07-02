@@ -26,27 +26,52 @@ class VoiceCommandButton extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          GestureDetector(
-            onTap: () => _handleTap(ref),
-            child: Container(
-              width: size,
-              height: size,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _getButtonColor(voiceState.state),
-                boxShadow: [
-                  BoxShadow(
-                    color: _getButtonColor(
-                      voiceState.state,
-                    ).withValues(alpha: 0.3),
-                    blurRadius: 8,
-                    spreadRadius: 2,
+          // Animated pulse effect for listening state
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            width: voiceState.state == VoiceCommandState.listening
+                ? size + 16
+                : size,
+            height: voiceState.state == VoiceCommandState.listening
+                ? size + 16
+                : size,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: voiceState.state == VoiceCommandState.listening
+                  ? _getButtonColor(voiceState.state).withValues(alpha: 0.2)
+                  : Colors.transparent,
+            ),
+            child: Center(
+              child: GestureDetector(
+                onTap: () => _handleTap(ref),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  width: size,
+                  height: size,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _getButtonColor(voiceState.state),
+                    boxShadow: [
+                      BoxShadow(
+                        color: _getButtonColor(
+                          voiceState.state,
+                        ).withValues(alpha: 0.4),
+                        blurRadius:
+                            voiceState.state == VoiceCommandState.listening
+                            ? 12
+                            : 8,
+                        spreadRadius:
+                            voiceState.state == VoiceCommandState.listening
+                            ? 4
+                            : 2,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: _buildButtonIcon(voiceState.state),
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: _buildButtonIcon(voiceState.state),
+                  ),
+                ),
               ),
             ),
           ),
@@ -134,11 +159,9 @@ class VoiceCommandButton extends ConsumerWidget {
           key: const ValueKey('mic'),
         );
       case VoiceCommandState.listening:
-        return Icon(
-          Icons.mic,
+        return _PulsingMicIcon(
           size: size * 0.4,
-          color: Colors.white,
-          key: const ValueKey('mic_active'),
+          key: const ValueKey('mic_listening'),
         );
       case VoiceCommandState.processing:
         return SizedBox(
@@ -151,10 +174,8 @@ class VoiceCommandButton extends ConsumerWidget {
           ),
         );
       case VoiceCommandState.speaking:
-        return Icon(
-          Icons.volume_up,
+        return _AnimatedSpeakerIcon(
           size: size * 0.4,
-          color: Colors.white,
           key: const ValueKey('speaking'),
         );
       case VoiceCommandState.error:
@@ -300,5 +321,103 @@ class FloatingVoiceCommandButton extends ConsumerWidget {
       return const Icon(Icons.volume_up, key: ValueKey('speaking'));
     }
     return const Icon(Icons.mic, key: ValueKey('idle'));
+  }
+}
+
+// Animated pulsing microphone icon for listening state
+class _PulsingMicIcon extends StatefulWidget {
+  final double size;
+
+  const _PulsingMicIcon({super.key, required this.size});
+
+  @override
+  State<_PulsingMicIcon> createState() => _PulsingMicIconState();
+}
+
+class _PulsingMicIconState extends State<_PulsingMicIcon>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    _animation = Tween<double>(
+      begin: 0.8,
+      end: 1.2,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _controller.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _animation.value,
+          child: Icon(Icons.mic, size: widget.size, color: Colors.white),
+        );
+      },
+    );
+  }
+}
+
+// Animated speaker icon for speaking state
+class _AnimatedSpeakerIcon extends StatefulWidget {
+  final double size;
+
+  const _AnimatedSpeakerIcon({super.key, required this.size});
+
+  @override
+  State<_AnimatedSpeakerIcon> createState() => _AnimatedSpeakerIconState();
+}
+
+class _AnimatedSpeakerIconState extends State<_AnimatedSpeakerIcon>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _animation = Tween<double>(
+      begin: 0.9,
+      end: 1.1,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _controller.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _animation.value,
+          child: Icon(Icons.volume_up, size: widget.size, color: Colors.white),
+        );
+      },
+    );
   }
 }

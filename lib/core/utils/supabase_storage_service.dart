@@ -277,6 +277,59 @@ class SupabaseStorageService {
     }
   }
 
+  /// Upload a generic file to Supabase storage
+  static Future<String?> uploadFile({
+    required File file,
+    required String bucket,
+    required String filePath,
+    int? maxFileSize,
+    List<String>? allowedExtensions,
+    Function(double)? onProgress,
+  }) async {
+    try {
+      // Ensure authentication before upload
+      await SupabaseAuthBridge.ensureAuthenticated();
+
+      // Validate file size if specified
+      if (maxFileSize != null) {
+        final fileSize = await file.length();
+        if (fileSize > maxFileSize) {
+          throw Exception(
+            'File size exceeds ${maxFileSize / (1024 * 1024)}MB limit',
+          );
+        }
+      }
+
+      // Validate file extension if specified
+      if (allowedExtensions != null) {
+        final extension = file.path.split('.').last.toLowerCase();
+        if (!allowedExtensions.contains(extension)) {
+          throw Exception(
+            'Invalid file format. Allowed: ${allowedExtensions.join(', ')}',
+          );
+        }
+      }
+
+      // Upload file
+      await _supabase.storage
+          .from(bucket)
+          .upload(
+            filePath,
+            file,
+            fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
+          );
+
+      // Get public URL
+      final publicUrl = _supabase.storage.from(bucket).getPublicUrl(filePath);
+
+      debugPrint('File uploaded successfully: $publicUrl');
+      return publicUrl;
+    } catch (e) {
+      debugPrint('Error uploading file: $e');
+      return null;
+    }
+  }
+
   /// Get file path from URL for deletion
   static String? getFilePathFromUrl(String url) {
     try {

@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "37505171781",
-    "project_id": "via-dit",
-    "storage_bucket": "via-dit.firebasestorage.app"
+    "project_number": "571510854781",
+    "project_id": "visual-dit",
+    "storage_bucket": "visual-dit.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:37505171781:android:3e219afbc0afe2a1c9fe2c",
+        "mobilesdk_app_id": "1:571510854781:android:8587121e9872f091dd8d14",
         "android_client_info": {
-          "package_name": "com.example.via"
+          "package_name": "com.curtis.via"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDP72eTrkkBWqzCbws7POP56b2gqPVXvtQ"
+          "current_key": "AIzaSyBwQyyldkC7nmztMSlKWgvOmg7r3Ky1IHk"
         }
       ],
       "services": {

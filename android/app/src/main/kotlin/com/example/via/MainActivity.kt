@@ -1,4 +1,4 @@
-package com.example.via
+package com.curtis.via
 
 import io.flutter.embedding.android.FlutterActivity
 

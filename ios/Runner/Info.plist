@@ -45,5 +45,46 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Smart Prospectus System Permissions -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs microphone access for voice feedback recording and voice commands.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses speech recognition for voice commands and accessibility features.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app may use camera for document scanning features.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photo library access to save and load documents.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>This app needs access to documents folder to manage prospectus files.</string>
+
+	<!-- Background Modes -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>background-processing</string>
+		<string>background-fetch</string>
+		<string>audio</string>
+	</array>
+
+	<!-- Notification Settings -->
+	<key>UIUserNotificationSettings</key>
+	<dict>
+		<key>UIUserNotificationTypeAlert</key>
+		<true/>
+		<key>UIUserNotificationTypeBadge</key>
+		<true/>
+		<key>UIUserNotificationTypeSound</key>
+		<true/>
+	</dict>
+
+	<!-- Accessibility -->
+	<key>UIAccessibilityTraits</key>
+	<string>UIAccessibilityTraitNone</string>
+
+	<!-- File Sharing -->
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 </dict>
 </plist>

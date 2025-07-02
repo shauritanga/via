@@ -31,17 +31,95 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        
+        // Enable multidex for large apps
+        multiDexEnabled = true
+        
+        // Test configuration
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        create("release") {
+            // For production, these should be loaded from environment variables
+            // or a secure keystore file
+            keyAlias = System.getenv("KEY_ALIAS") ?: "via-release"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "via-release-password"
+            storeFile = file(System.getenv("KEYSTORE_PATH") ?: "via-release.keystore")
+            storePassword = System.getenv("STORE_PASSWORD") ?: "via-release-password"
+        }
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
+            
+            // Enable crash reporting in release builds
+            buildConfigField("boolean", "ENABLE_CRASH_REPORTING", "true")
+            buildConfigField("boolean", "ENABLE_ANALYTICS", "true")
+        }
+        
+        debug {
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
+            
+            // Disable crash reporting in debug builds
+            buildConfigField("boolean", "ENABLE_CRASH_REPORTING", "false")
+            buildConfigField("boolean", "ENABLE_ANALYTICS", "false")
+        }
+    }
+
+    // Enable R8 optimization
+    buildFeatures {
+        buildConfig = true
+    }
+
+    // Bundle configuration for Play Store
+    bundle {
+        language {
+            enableSplit = true
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
         }
     }
 }
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // Add multidex support
+    implementation("androidx.multidex:multidex:2.0.1")
+    
+    // Add security library for production
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    
+    // Add biometric authentication support
+    implementation("androidx.biometric:biometric:1.1.0")
+    
+    // Add work manager for background tasks
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    
+    // Add room for local database
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    
+    // Add lifecycle components
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    
+    // Add coroutines support
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    
+    // Add network security config
+    implementation("androidx.security:security-network-security:1.0.0")
 }
